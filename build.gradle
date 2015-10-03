@@ -25,14 +25,12 @@ configFile.withReader {
 
 apply plugin: 'forge'
 
-ENV = System.getenv()
-
 version = config.mod_version
 group = config.mod_group
 archivesBaseName = config.mod_name
 
-if (ENV.BUILD_NUMBER)
-	version = "${config.mod_version}.b${ENV.BUILD_NUMBER}"
+if (System.getenv().BUILD_NUMBER)
+	version = "${config.mod_version}.b${System.getenv().BUILD_NUMBER}"
 
 minecraft {
     version = "${config.mc_version}-${config.forge_version}"
