@@ -23,7 +23,7 @@ public class TooltipMod {
 	
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		
+		proxy.init();
 	}
 
 }
