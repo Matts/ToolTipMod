@@ -2,20 +2,20 @@ package info.mattmc.tooltipmod.client;
 
 import java.util.List;
 
-import org.lwjgl.input.Keyboard;
-
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
+
+import org.lwjgl.input.Keyboard;
 
 @SideOnly(Side.CLIENT)
 public class EventListener {
@@ -26,23 +26,27 @@ public class EventListener {
 
 	@SubscribeEvent
 	public void drawTooltip(ItemTooltipEvent event) {
-		ItemStack stack = event.itemStack;
-		event.toolTip.add("Registry name:");
-		event.toolTip.add("" + Item.itemRegistry.getNameForObject(stack.getItem()));
+		ItemStack stack = event.getItemStack();
+		event.getToolTip().add("Registry name:");
+		event.getToolTip().add("" + Item.itemRegistry.getNameForObject(stack.getItem()));
 		int[] ids = OreDictionary.getOreIDs(stack);
 		if (ids.length != 0) {
-			event.toolTip.add("OreDictionary names:");
+			event.getToolTip().add("OreDictionary names:");
 			for (int id : ids) {
-				event.toolTip.add("    " + OreDictionary.getOreName(id));
+				event.getToolTip().add("    " + OreDictionary.getOreName(id));
 			}
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-			if (event.itemStack.hasTagCompound()) {
-				event.toolTip.add("NBT Tags:");
-				addTagsToList("", event.itemStack.getTagCompound(), event.toolTip);
+			event.getToolTip().add("Item Class: " + stack.getItem().getClass().getCanonicalName());
+			if (stack.getItem() instanceof ItemBlock) {
+				event.getToolTip().add("Block Class: " + ((ItemBlock)stack.getItem()).getBlock().getClass().getCanonicalName());
+			}
+			if (event.getItemStack().hasTagCompound()) {
+				event.getToolTip().add("NBT Tags:");
+				addTagsToList("", event.getItemStack().getTagCompound(), event.getToolTip());
 			}
 			else {
-				event.toolTip.add("No NBT Tags.");
+				event.getToolTip().add("No NBT Tags.");
 			}
 		}
 	}
