@@ -28,7 +28,7 @@ public class EventListener {
 	public void drawTooltip(ItemTooltipEvent event) {
 		ItemStack stack = event.getItemStack();
 		event.getToolTip().add("Registry name:");
-		event.getToolTip().add("" + Item.itemRegistry.getNameForObject(stack.getItem()));
+		event.getToolTip().add("" + Item.REGISTRY.getNameForObject(stack.getItem()));
 		int[] ids = OreDictionary.getOreIDs(stack);
 		if (ids.length != 0) {
 			event.getToolTip().add("OreDictionary names:");
