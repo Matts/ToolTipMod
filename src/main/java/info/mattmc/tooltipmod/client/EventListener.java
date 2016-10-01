@@ -9,20 +9,21 @@ package info.mattmc.tooltipmod.client;
 
 import java.util.List;
 
+import org.lwjgl.input.Keyboard;
+
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
-
-import org.lwjgl.input.Keyboard;
 
 @SideOnly(Side.CLIENT)
 public class EventListener {
@@ -56,8 +57,8 @@ public class EventListener {
 				event.getToolTip().add("No NBT Tags.");
 			}
 		}
-		event.toolTip.add("Damage:");
-		event.toolTip.add(stack.getItemDamage() + "/" + stack.getMaxDamage());
+		event.getToolTip().add("Damage:");
+		event.getToolTip().add(stack.getItemDamage() + "/" + stack.getMaxDamage());
 	}
 
 	private static void addTagsToList(String prefix, NBTTagCompound nbt, List tooltip) {
