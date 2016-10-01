@@ -20,6 +20,7 @@ import net.minecraft.nbt.NBTTagList;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -32,7 +33,7 @@ public class EventListener {
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void drawTooltip(ItemTooltipEvent event) {
 		ItemStack stack = event.getItemStack();
 		event.getToolTip().add("Registry name:");
@@ -44,6 +45,8 @@ public class EventListener {
 				event.getToolTip().add("    " + OreDictionary.getOreName(id));
 			}
 		}
+		event.getToolTip().add("Damage: " + stack.getItemDamage() + "/" + stack.getMaxDamage());
+		event.getToolTip().add("Metadata:" + stack.getMetadata());
 		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
 			event.getToolTip().add("Item Class: " + stack.getItem().getClass().getCanonicalName());
 			if (stack.getItem() instanceof ItemBlock) {
@@ -57,8 +60,6 @@ public class EventListener {
 				event.getToolTip().add("No NBT Tags.");
 			}
 		}
-		event.getToolTip().add("Damage:");
-		event.getToolTip().add(stack.getItemDamage() + "/" + stack.getMaxDamage());
 	}
 
 	private static void addTagsToList(String prefix, NBTTagCompound nbt, List<String> tooltip) {
