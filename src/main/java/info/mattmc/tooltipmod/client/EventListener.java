@@ -44,6 +44,8 @@ public class EventListener {
 				event.getToolTip().add("    " + OreDictionary.getOreName(id));
 			}
 		}
+		event.getToolTip().add("Damage: " + stack.getItemDamage() + "/" + stack.getMaxDamage());
+		event.getToolTip().add("Metadata:" + stack.getMetadata());
 		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
 			event.getToolTip().add("Item Class: " + stack.getItem().getClass().getCanonicalName());
 			if (stack.getItem() instanceof ItemBlock) {
@@ -57,8 +59,6 @@ public class EventListener {
 				event.getToolTip().add("No NBT Tags.");
 			}
 		}
-		event.getToolTip().add("Damage:");
-		event.getToolTip().add(stack.getItemDamage() + "/" + stack.getMaxDamage());
 	}
 
 	private static void addTagsToList(String prefix, NBTTagCompound nbt, List<String> tooltip) {
