@@ -61,7 +61,7 @@ public class EventListener {
 		event.getToolTip().add(stack.getItemDamage() + "/" + stack.getMaxDamage());
 	}
 
-	private static void addTagsToList(String prefix, NBTTagCompound nbt, List tooltip) {
+	private static void addTagsToList(String prefix, NBTTagCompound nbt, List<String> tooltip) {
 		for (String key : nbt.getKeySet()) {
 			NBTBase nbtNew = nbt.getTag(key);
 			if (nbtNew == null) continue;
@@ -79,7 +79,7 @@ public class EventListener {
 		}
 	}
 
-	private static void addTagsToList(String prefix, NBTTagList nbt, List tooltip) {
+	private static void addTagsToList(String prefix, NBTTagList nbt, List<String> tooltip) {
 		for (int i = 0; i < nbt.tagCount(); i++) {
 			NBTTagCompound nbtNew = nbt.getCompoundTagAt(i);
 			tooltip.add(prefix + "Tag " + i + ": (" + getType(nbtNew) + ")");
