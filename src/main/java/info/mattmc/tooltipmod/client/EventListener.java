@@ -56,6 +56,8 @@ public class EventListener {
 				event.getToolTip().add("No NBT Tags.");
 			}
 		}
+		event.toolTip.add("Damage:");
+		event.toolTip.add(stack.getItemDamage() + "/" + stack.getMaxDamage());
 	}
 
 	private static void addTagsToList(String prefix, NBTTagCompound nbt, List tooltip) {
@@ -79,7 +81,7 @@ public class EventListener {
 	private static void addTagsToList(String prefix, NBTTagList nbt, List tooltip) {
 		for (int i = 0; i < nbt.tagCount(); i++) {
 			NBTTagCompound nbtNew = nbt.getCompoundTagAt(i);
-			tooltip.add(prefix + "(" + getType(nbtNew) + ")");
+			tooltip.add(prefix + "Tag " + i + ": (" + getType(nbtNew) + ")");
 			addTagsToList(prefix + "  ", nbtNew, tooltip);
 		}
 	}
