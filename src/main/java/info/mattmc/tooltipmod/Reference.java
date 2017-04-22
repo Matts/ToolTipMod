@@ -32,9 +32,9 @@ public class Reference {
 
 	private static Properties prop;
 
-	public static final String MOD_ID = "TooltipMod";
+	public static final String MOD_ID = "tooltipmod";
 
-	public static final String MOD_NAME = MOD_ID;
+	public static final String MOD_NAME = "TooltipMod";
 
 	public static final String VERSION = getProp("version");
 
