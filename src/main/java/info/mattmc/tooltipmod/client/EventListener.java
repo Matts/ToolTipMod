@@ -17,7 +17,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -36,6 +35,10 @@ public class EventListener {
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void drawTooltip(ItemTooltipEvent event) {
 		ItemStack stack = event.getItemStack();
+		if (stack.isEmpty()) {
+			event.getToolTip().add("Empty Stack!");
+			return;
+		}
 		event.getToolTip().add("Registry name:");
 		event.getToolTip().add("" + Item.REGISTRY.getNameForObject(stack.getItem()));
 		int[] ids = OreDictionary.getOreIDs(stack);
