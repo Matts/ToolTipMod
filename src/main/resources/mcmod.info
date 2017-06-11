@@ -1,6 +1,6 @@
 [
 {
-  "modid": "TooltipMod",
+  "modid": "tooltipmod",
   "name": "TooltipMod",
   "description": "Just a simple Tooltip Mod.",
   "version": "${version}",
