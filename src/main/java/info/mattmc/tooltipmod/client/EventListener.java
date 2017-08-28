@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2016, MattsOnMc and Aroma1997
- *
+ * <p>
  * The Tooltipmod is distributed under the terms of the Minecraft Mod Public
  * License 1.0, or MMPL. Please check the contents of the license located in
  * http://www.mod-buildcraft.com/MMPL-1.0.txt
@@ -17,6 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -53,13 +54,12 @@ public class EventListener {
 		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
 			event.getToolTip().add("Item Class: " + stack.getItem().getClass().getCanonicalName());
 			if (stack.getItem() instanceof ItemBlock) {
-				event.getToolTip().add("Block Class: " + ((ItemBlock)stack.getItem()).getBlock().getClass().getCanonicalName());
+				event.getToolTip().add("Block Class: " + ((ItemBlock) stack.getItem()).getBlock().getClass().getCanonicalName());
 			}
 			if (event.getItemStack().hasTagCompound()) {
 				event.getToolTip().add("NBT Tags:");
 				addTagsToList("", event.getItemStack().getTagCompound(), event.getToolTip());
-			}
-			else {
+			} else {
 				event.getToolTip().add("No NBT Tags.");
 			}
 		}
@@ -68,16 +68,16 @@ public class EventListener {
 	private static void addTagsToList(String prefix, NBTTagCompound nbt, List<String> tooltip) {
 		for (String key : nbt.getKeySet()) {
 			NBTBase nbtNew = nbt.getTag(key);
-			if (nbtNew == null) continue;
+			if (nbtNew == null) {
+				continue;
+			}
 			if (nbtNew instanceof NBTTagCompound) {
 				tooltip.add(prefix + key + " (" + getType(nbtNew) + ") =");
 				addTagsToList(prefix + "  ", (NBTTagCompound) nbtNew, tooltip);
-			}
-			else if (nbtNew instanceof NBTTagList) {
+			} else if (nbtNew instanceof NBTTagList) {
 				tooltip.add(prefix + key + " (" + getType(nbtNew) + ") =");
-				addTagsToList(prefix + "  ", (NBTTagList)nbtNew, tooltip);
-			}
-			else {
+				addTagsToList(prefix + "  ", (NBTTagList) nbtNew, tooltip);
+			} else {
 				tooltip.add(prefix + "  " + key + " = " + nbtNew + " (" + getType(nbtNew) + ")");
 			}
 		}
