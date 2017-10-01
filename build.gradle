@@ -37,8 +37,15 @@ minecraft {
 	makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 }
 
-dependencies {
+repositories {
+	maven {
+		name = "aroma"
+		url = "http://files.aroma1997.org/maven/"
+	}
+}
 
+dependencies {
+	compile "aroma1997.core:Aroma1997Core-${config.mc_version}:+:deobf"
 }
 
 processResources
