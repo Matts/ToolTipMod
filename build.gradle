@@ -1,25 +1,25 @@
 
 // For those who want the bleeding edge
 buildscript {
-    repositories {
-        jcenter()
-        maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
-        }
-    }
-    dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-    }
+	repositories {
+		jcenter()
+		maven {
+			name = "forge"
+			url = "http://files.minecraftforge.net/maven"
+		}
+	}
+	dependencies {
+		classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+	}
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
 ext.configFile = file "build.properties"
 
 configFile.withReader {
-    def prop = new Properties()
-    prop.load(it)
-    project.ext.config = new ConfigSlurper().parse prop
+	def prop = new Properties()
+	prop.load(it)
+	project.ext.config = new ConfigSlurper().parse prop
 }
 
 version = config.mod_version
@@ -29,36 +29,43 @@ if (System.getenv().BUILD_NUMBER)
 	version = "${config.mod_version}.b${System.getenv().BUILD_NUMBER}"
 
 minecraft {
-    version = "${config.mc_version}-${config.forge_version}"
-    runDir = "run"
+	version = "${config.mc_version}-${config.forge_version}"
+	runDir = "run"
+	
+	// simply re-run your setup task after changing the mappings to update your workspace.
+	mappings = "${config.mcp_version}"
+	makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
+}
 
-    // simply re-run your setup task after changing the mappings to update your workspace.
-    mappings = "${config.mcp_version}"
-    makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
+repositories {
+	maven {
+		name = "aroma"
+		url = "http://files.aroma1997.org/maven/"
+	}
 }
 
 dependencies {
-
+	compile "aroma1997.core:Aroma1997Core-${config.mc_version}:+:deobf"
 }
 
 processResources
 {
-    // this will ensure that this task is redone when the versions change.
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
+	// this will ensure that this task is redone when the versions change.
+	inputs.property "version", project.version
+	inputs.property "mcversion", project.minecraft.version
 
-    // replace stuff in mcmod.info, nothing else
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-                
-        // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
-    }
-        
-    // copy everything else, thats not the mcmod.info
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
-    }
+	// replace stuff in mcmod.info, nothing else
+	from(sourceSets.main.resources.srcDirs) {
+		include 'mcmod.info'
+		
+		// replace version and mcversion
+		expand 'version':project.version, 'mcversion':project.minecraft.version
+	}
+	
+	// copy everything else, thats not the mcmod.info
+	from(sourceSets.main.resources.srcDirs) {
+		exclude 'mcmod.info'
+	}
 }
 
 jar {
@@ -66,11 +73,11 @@ jar {
 }	
 
 task deobfJar(type: Jar) {
-    from sourceSets.main.output
+	from sourceSets.main.output
 	appendix = config.mc_version
-    classifier = 'deobf'
+	classifier = 'deobf'
 }
  
 artifacts {
-        archives deobfJar
+	archives deobfJar
 }

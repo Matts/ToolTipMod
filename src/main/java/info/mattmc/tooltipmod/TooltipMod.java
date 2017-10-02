@@ -7,12 +7,15 @@
  */
 package info.mattmc.tooltipmod;
 
+import info.mattmc.tooltipmod.commands.CommandTooltip;
+
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME)
@@ -32,6 +35,11 @@ public class TooltipMod {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		proxy.init();
+	}
+
+	@EventHandler
+	public void serverStartup(FMLServerStartingEvent event) {
+		event.registerServerCommand(new CommandTooltip("tooltip"));
 	}
 
 }
