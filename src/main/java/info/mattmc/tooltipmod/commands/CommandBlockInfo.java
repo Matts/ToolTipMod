@@ -3,17 +3,15 @@ package info.mattmc.tooltipmod.commands;
 import java.util.ArrayList;
 import java.util.List;
 
-import info.mattmc.tooltipmod.TooltipHelper;
-
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 
 import aroma1997.core.command.AromaBaseCommand;
 import aroma1997.core.util.ServerUtil;
@@ -43,23 +41,23 @@ public class CommandBlockInfo extends AromaBaseCommand {
 		} else {
 			throw new CommandException("Invalid amount of arguments specified.");
 		}
-		sender.sendMessage(ServerUtil.getChatForString(targetPos + ""));
-		sender.sendMessage(ServerUtil.getChatForString(sender.getEntityWorld().getBlockState(targetPos) + ""));
-		TileEntity te = sender.getEntityWorld().getTileEntity(targetPos);
-		if (te == null) {
-			sender.sendMessage(ServerUtil.getChatForString("No TE detected."));
-		} else {
-			NBTTagCompound nbt = te.writeToNBT(new NBTTagCompound());
-			List<String> info = new ArrayList<>();
-			TooltipHelper.addNBTTooltip(nbt, info);
-			for (String str : info) {
-				sender.sendMessage(ServerUtil.getChatForString(str));
-			}
+
+		for (String str : getBlockInfo(sender.getEntityWorld(), targetPos)) {
+			sender.sendMessage(ServerUtil.getChatForString(str));
 		}
+	}
+
+	public List<String> getBlockInfo(World world, BlockPos pos) {
+		List<String> list = new ArrayList<>();
+		IBlockState state = world.getBlockState(pos);
+		list.add(state + "");
+		list.add(state.getBlock().getClass().getName());
+		list.add(state.getBlock().getRegistryName() + "");
+		return list;
 	}
 
 	@Override
 	public String getUsage(ICommandSender sender) {
-		return "/blockinfo [<x> <y> <z>]";
+		return "/" + getName() + " [<x> <y> <z>]";
 	}
 }
