@@ -6,7 +6,7 @@
  * http://www.mod-buildcraft.com/MMPL-1.0.txt
  */
 
-package info.mattmc.tooltipmod;
+package com.mattsmeets.tooltipmod;
 
 import java.util.ArrayList;
 import java.util.List;

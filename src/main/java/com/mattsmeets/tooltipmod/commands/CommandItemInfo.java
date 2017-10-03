@@ -1,7 +1,7 @@
-package info.mattmc.tooltipmod.commands;
+package com.mattsmeets.tooltipmod.commands;
 
 
-import info.mattmc.tooltipmod.TooltipHelper;
+import com.mattsmeets.tooltipmod.TooltipHelper;
 
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;

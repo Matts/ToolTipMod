@@ -5,10 +5,10 @@
  * License 1.0, or MMPL. Please check the contents of the license located in
  * http://www.mod-buildcraft.com/MMPL-1.0.txt
  */
-package info.mattmc.tooltipmod.client;
+package com.mattsmeets.tooltipmod.client;
 
-import info.mattmc.tooltipmod.CommonProxy;
-import info.mattmc.tooltipmod.commands.CommandTooltip;
+import com.mattsmeets.tooltipmod.CommonProxy;
+import com.mattsmeets.tooltipmod.commands.CommandTooltip;
 
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.fml.relauncher.Side;

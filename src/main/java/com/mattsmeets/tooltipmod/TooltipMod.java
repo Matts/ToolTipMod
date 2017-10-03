@@ -5,9 +5,9 @@
  * License 1.0, or MMPL. Please check the contents of the license located in
  * http://www.mod-buildcraft.com/MMPL-1.0.txt
  */
-package info.mattmc.tooltipmod;
+package com.mattsmeets.tooltipmod;
 
-import info.mattmc.tooltipmod.commands.CommandTooltip;
+import com.mattsmeets.tooltipmod.commands.CommandTooltip;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -24,7 +24,7 @@ public class TooltipMod {
 	@Instance
 	public static TooltipMod instance;
 
-	@SidedProxy(clientSide = "info.mattmc.tooltipmod.client.ClientProxy", serverSide = "info.mattmc.tooltipmod.CommonProxy")
+	@SidedProxy(clientSide = "com.mattsmeets.tooltipmod.client.ClientProxy", serverSide = "com.mattsmeets.tooltipmod.CommonProxy")
 	public static CommonProxy proxy;
 
 	@EventHandler

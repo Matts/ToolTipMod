@@ -1,4 +1,4 @@
-package info.mattmc.tooltipmod.commands;
+package com.mattsmeets.tooltipmod.commands;
 
 import aroma1997.core.command.AromaSubCommand;
 

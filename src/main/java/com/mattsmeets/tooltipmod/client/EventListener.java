@@ -5,9 +5,9 @@
  * License 1.0, or MMPL. Please check the contents of the license located in
  * http://www.mod-buildcraft.com/MMPL-1.0.txt
  */
-package info.mattmc.tooltipmod.client;
+package com.mattsmeets.tooltipmod.client;
 
-import info.mattmc.tooltipmod.TooltipHelper;
+import com.mattsmeets.tooltipmod.TooltipHelper;
 import org.lwjgl.input.Keyboard;
 
 import net.minecraftforge.common.MinecraftForge;
