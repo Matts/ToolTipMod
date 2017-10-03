@@ -9,6 +9,7 @@ package com.mattsmeets.tooltipmod;
 
 public class CommonProxy {
 
-	public void init() {}
+    public void init() {
+    }
 
 }

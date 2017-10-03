@@ -7,20 +7,20 @@
  */
 package com.mattsmeets.tooltipmod.client;
 
-import com.mattsmeets.tooltipmod.CommonProxy;
-import com.mattsmeets.tooltipmod.commands.CommandTooltip;
-
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.mattsmeets.tooltipmod.CommonProxy;
+import com.mattsmeets.tooltipmod.commands.CommandTooltip;
+
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
 
-	@Override
-	public void init() {
-		new EventListener();
-		ClientCommandHandler.instance.registerCommand(new CommandTooltip("ctooltip"));
-	}
+    @Override
+    public void init() {
+        new EventListener();
+        ClientCommandHandler.instance.registerCommand(new CommandTooltip("ctooltip"));
+    }
 
 }

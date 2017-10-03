@@ -7,9 +7,6 @@
  */
 package com.mattsmeets.tooltipmod.client;
 
-import com.mattsmeets.tooltipmod.TooltipHelper;
-import org.lwjgl.input.Keyboard;
-
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -17,16 +14,20 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import org.lwjgl.input.Keyboard;
+
+import com.mattsmeets.tooltipmod.TooltipHelper;
+
 @SideOnly(Side.CLIENT)
 public class EventListener {
 
-	EventListener() {
-		MinecraftForge.EVENT_BUS.register(this);
-	}
+    EventListener() {
+        MinecraftForge.EVENT_BUS.register(this);
+    }
 
-	@SubscribeEvent(priority = EventPriority.LOWEST)
-	public void drawTooltip(ItemTooltipEvent event) {
-		event.getToolTip().addAll(TooltipHelper.getItemInfo(event.getItemStack(), Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)));
-	}
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public void drawTooltip(ItemTooltipEvent event) {
+        event.getToolTip().addAll(TooltipHelper.getItemInfo(event.getItemStack(), Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)));
+    }
 
 }
