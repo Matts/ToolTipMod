@@ -9,6 +9,7 @@ public class CommandTooltip extends AromaSubCommand {
 		addSubCommand(new CommandItemInfo());
 		addSubCommand(new CommandBlockInfo());
 		addSubCommand(new CommandTileEntityNBTInfo());
+		addSubCommand(new CommandTileEntityFieldInfo());
 	}
 
 }
