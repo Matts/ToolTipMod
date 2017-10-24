@@ -5,3 +5,8 @@ bin
 eclipse
 .classpath
 .project
+*.iml
+
+*.ipr
+
+*.iws
