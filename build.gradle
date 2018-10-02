@@ -81,3 +81,30 @@ task deobfJar(type: Jar) {
 artifacts {
 	archives deobfJar
 }
+
+task signJar(dependsOn: ['deobfJar', 'jar']){
+	doLast {
+		// Skip the task if our secret data isn't available
+		if (project.hasProperty('signingKeystore')) {
+			ant.signjar(
+					destDir: "$buildDir/libs",
+					jar: "$buildDir/libs/*.jar",
+					alias: signingAlias,
+					storetype: "jks",
+					keystore: signingKeystore,
+					storepass: signingStorepass
+			)
+		} else {
+			println("Skipping jar signing. Signing keystore isn't available.")
+		}
+	}
+}
+build.dependsOn signJar
+
+def getAvailableMinecraftVersions() {
+	if (!config.availableMcVersions) {
+		return [ config.mc_version ]
+	} else {
+		return config.availableMcVersions.split(',')
+	}
+}
