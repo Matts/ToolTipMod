@@ -7,15 +7,19 @@
  */
 package com.mattsmeets.tooltip.commands;
 
-import aroma1997.core.command.AromaBaseCommand;
-import aroma1997.core.util.ServerUtil;
+import com.mattsmeets.tooltip.TooltipHelper;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 
-import com.mattsmeets.tooltip.TooltipHelper;
+import aroma1997.core.command.AromaBaseCommand;
+import aroma1997.core.util.ServerUtil;
 
 public class CommandItemInfo extends AromaBaseCommand {
 
@@ -33,9 +37,19 @@ public class CommandItemInfo extends AromaBaseCommand {
 			slot = ((EntityPlayer) sender).inventory.currentItem;
 		}
 		ItemStack stack = ((EntityPlayer) sender).inventory.getStackInSlot(slot);
-		sender.sendMessage(ServerUtil.getChatForString(stack.getDisplayName()));
-		for (String info : TooltipHelper.getItemInfo(stack, true)) {
-			sender.sendMessage(ServerUtil.getChatForString(info));
+		List<String> info = new ArrayList<>();
+		info.add(stack.getDisplayName());
+
+		addInfo(stack, info);
+
+		for (String msg : info) {
+			sender.sendMessage(ServerUtil.getChatForString(msg));
+		}
+	}
+
+	protected void addInfo(ItemStack stack, List<String>info) {
+		for (String current : TooltipHelper.getItemInfo(stack, true)) {
+			info.add(current);
 		}
 	}
 
