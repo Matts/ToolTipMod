@@ -1,16 +1,16 @@
 [
-{
-  "modid": "tooltipmod",
-  "name": "TooltipMod",
-  "description": "Just a simple Tooltip Mod.",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "",
-  "updateUrl": "",
-  "authorList": ["MattsMC, Aroma1997"],
-  "credits": "MattsMC and Aroma1997",
-  "logoFile": "",
-  "screenshots": [],
-  "dependencies": []
-}
+    {
+        "modid": "tooltipmod",
+        "name": "TooltipMod",
+        "description": "Just a simple Tooltip Mod.",
+        "version": "${version}",
+        "mcversion": "${mcversion}",
+        "url": "",
+        "updateUrl": "",
+        "authorList": ["MattsMC, Aroma1997"],
+        "credits": "MattsMC and Aroma1997",
+        "logoFile": "",
+        "screenshots": [],
+        "dependencies": []
+    }
 ]
